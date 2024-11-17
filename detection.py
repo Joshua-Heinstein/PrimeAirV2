@@ -1,6 +1,6 @@
 import apriltag
 import argparse
-#import cv2
+import cv2
 
 # construct the argument parser and parse the arguments
 ap = argparse.ArgumentParser()
