@@ -16,7 +16,7 @@ gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 # define the AprilTags detector options and then detect the AprilTags
 # in the input image
 print("[INFO] detecting AprilTags...")
-options = apriltag.DetectorOptions(families="tag36h11")
+options = apriltag.DetectorOptions(families="tag16h5")
 detector = apriltag.Detector(options)
 results = detector.detect(gray)
 print("[INFO] {} total AprilTags detected".format(len(results)))
