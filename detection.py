@@ -23,9 +23,9 @@ results = detector.detect(gray)
 print("[INFO] {} total AprilTags detected".format(len(results)))
 
 # 3x3 numpy array for the camera matrix
-cameraMatrix=np.array([[3,3,3], [3,3,3], [3,3,3]])
+cameraMatrix=np.array([[597.348, 0 ,320.993], [0, 610.151, 289.052], [0,0,0]])
 # 1x5 numpy array for distortion coeffecients
-distCoeffs=np.array([1], [2], [3], [4], [5])
+distCoeffs=np.array([0.94], [-141.48], [0], [-0.02], [4,017.88])
 #defining object points
 tag_size=1
 ob_pt1 = [-tag_size/2, -tag_size/2, 0.0]
@@ -73,7 +73,6 @@ for r in results:
 		cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255, 0), 2)
 	print("[INFO] tag family: {}".format(tagFamily))
 	print(ptA)
-		
 
 _,rvecs,tvecs = cv2.solvePnP(ob_pts, results[0].corners,cameraMatrix, distCoeffs)
 
