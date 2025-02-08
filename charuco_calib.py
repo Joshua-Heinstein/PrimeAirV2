@@ -3,18 +3,24 @@
 # tkaufman@g.hmc.edu
 # 2/5/2025
 
+##############################################################################
+# Script that calibrates camera by using OpenCV's Charuco calibration library
+##############################################################################
+
+# Must have python 3.5 to 3.10 to properly import pyrealsense2
+
 import cv2
 import numpy as np
-import pyrealsense2 as rs
+import pyrealsense2 as rs 
 
-# ArUco dictionary and ChArUco board parameters
+# ArUco dictionary and ChArUco board parameters...more likely we'll get rid of this and put in the Charuco family tag
 aruco_dict = cv2.aruco.Dictionary_get(cv2.aruco.DICT_6X6_250)
 board = cv2.aruco.CharucoBoard_create(5, 7, 0.04, 0.02, aruco_dict)  # (squaresX, squaresY, squareLength, markerLength)
 
-# Initialize RealSense pipeline
+# Initialize RealSense pipeline... This section might be unnecessary. 
 pipeline = rs.pipeline()
 config = rs.config()
-config.enable_stream(rs.stream.color, 640, 480, rs.format.bgr8, 30)
+config.enable_stream(rs.stream.color, 640, 480, rs.format.bgr8, 30) # VGA format
 pipeline.start(config)
 
 # Parameters for calibration
@@ -24,7 +30,7 @@ image_size = None
 frames_captured = 0
 num_images = 20  # Number of frames to capture before calibrating
 
-print("Press 'c' to capture a frame for calibration, and 'q' to quit.")
+print("Press 'c' to capture a frame for calibration, and 'q' to quit.") # According to 
 
 while True:
     # Capture frame from RealSense
@@ -82,7 +88,7 @@ ret, camera_matrix, dist_coeffs, rvecs, tvecs = cv2.aruco.calibrateCameraCharuco
 print("\nCamera Matrix:\n", camera_matrix)
 print("\nDistortion Coefficients:\n", dist_coeffs)
 
-# Save calibration results to a file
-np.savez("camera_calibration_realsense.npz", camera_matrix=camera_matrix, dist_coeffs=dist_coeffs)
+# Save calibration results to a file...DO NOT ADD TO REPOSITORY. File is too big
+np.savez("camera_calibration_realsense.npz", camera_matrix=camera_matrix, dist_coeffs=dist_coeffs) # stores array data using gzip compression
 
 print("Calibration complete. Results saved to 'camera_calibration_realsense.npz'.")
