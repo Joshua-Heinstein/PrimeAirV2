@@ -71,7 +71,7 @@ while True:
         cv2.imshow("RealSense ChArUco Calibration", frame)
 
         # Capture frame when 'c' is pressed
-        key = cv2.waitKey(1) & 0xFF
+        key = cv2.waitKey(5) & 0xFF
         if key == ord('c'):
             if charuco_corners is not None and charuco_ids is not None:
                 all_corners.append(np.array(charuco_corners, dtype=np.float32))
