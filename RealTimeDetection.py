@@ -6,17 +6,17 @@ import apriltag
 # Camera Setup and Calibration
 # -------------------------
 # Open the default camera (index 0)
-cap = cv2.VideoCapture(0)
+cap = cv2.VideoCapture(2)
 if not cap.isOpened():
     print("Error: Could not open video stream.")
     exit()
 
 # Replace these with your actual calibration parameters.
 # The camera matrix (intrinsics) and distortion coefficients must be accurate.
-cameraMatrix = np.array([[597.348,   0.0,   320.993],
-                         [  0.0,   610.151, 289.052],
+cameraMatrix = np.array([[606.34609364,   0.0,   345.38797225],
+                         [  0.0,   608.9089477, 268.02026849],
                          [  0.0,     0.0,     1.0]], dtype=np.float64)
-distCoeffs = np.array([0.94, -141.48, 0, -0.02, 4017.88], dtype=np.float64)
+distCoeffs = np.array([6.47949776e-02, -2.94023893e+01, 1.35293374e-02, -7.30530753e-03, 1.21214109e+03], dtype=np.float64)
 
 # -------------------------
 # AprilTag and Pose Setup
