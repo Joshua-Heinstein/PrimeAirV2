@@ -100,13 +100,14 @@ print("\nCalibration complete!")
 print("\nCamera Matrix:\n", camera_matrix)
 print("\nDistortion Coefficients:\n", dist_coeffs)
 
+# currently very cluttered on the screen. Will need to clean up but the results are looking great!!!
 def get_3d_coordinates(depth_frame, color_intrin, pixel_coords):
     """Convert pixel coordinates to 3D world coordinates using depth data."""
     depth = depth_frame.get_distance(int(pixel_coords[0]), int(pixel_coords[1]))
     return rs.rs2_deproject_pixel_to_point(color_intrin, [pixel_coords[0], pixel_coords[1]], depth)
 
 print("\nStarting 3D tracking...")
-print("Press 'q' to quit.")
+print("Press 'q' to quit.") # lots of latency
 
 # 3D Tracking Phase
 try:
