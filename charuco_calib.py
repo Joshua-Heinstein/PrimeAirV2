@@ -71,7 +71,7 @@ while frames_captured < num_images:
             
         cv2.imshow("Calibration", frame)
         
-        # Capture frame when 'c' is pressed
+        # Capture frame when 'c' is pressed...very helpful
         key = cv2.waitKey(1) & 0xFF
         if key == ord('c'):
             if charuco_corners is not None and charuco_ids is not None:
@@ -107,7 +107,11 @@ def get_3d_coordinates(depth_frame, color_intrin, pixel_coords):
     return rs.rs2_deproject_pixel_to_point(color_intrin, [pixel_coords[0], pixel_coords[1]], depth)
 
 print("\nStarting 3D tracking...")
-print("Press 'q' to quit.") # lots of latency
+print("Press 'q' to quit.") # lots of latency...instead press <ctrl> + <c> to exit tracking mode back into terminal
+
+# create way to pipe this data to a log file
+
+# find way to obtain 3d coord info without a hard connection (IoT by using esp32 board with integrated wifi...might be too slow though and it has limited range)
 
 # 3D Tracking Phase
 try:
