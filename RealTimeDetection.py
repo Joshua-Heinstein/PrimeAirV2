@@ -11,16 +11,16 @@ if not cap.isOpened():
     exit()
 
 # Replace these with your actual calibration parameters.
-cameraMatrix = np.array([[606.34609364,   0.0,           345.38797225],
-                         [  0.0,           608.9089477,   268.02026849],
+cameraMatrix = np.array([[1.13216331e+03,   0.0,           9.49677650e+02],
+                         [  0.0,           1.13011561e+03,   5.24105433e+02],
                          [  0.0,             0.0,           1.0]], dtype=np.float64)
-distCoeffs = np.array([6.47949776e-02, -2.94023893e+01, 1.35293374e-02, -7.30530753e-03, 1.21214109e+03], dtype=np.float64)
+distCoeffs = np.array([.17034227, -.42613258, -.0033131063, -.00304899, .22628274], dtype=np.float64)
 
 # -------------------------
 # AprilTag and Pose Setup
 # -------------------------
 # Define the tag size (the length of one side) in meters.
-tag_size = 0.15  # Adjust to your tag's physical size
+tag_size = 0.155  # Adjust to your tag's physical size
 
 # Define the 3D coordinates of the AprilTag corners in the tag's coordinate system.
 # (Assuming the tag is centered at (0, 0, 0) and lies in the XY plane)
@@ -40,10 +40,10 @@ detector = apriltag.Detector(options)
 # The rotation is assumed to be identity (i.e. the tag's axes are aligned with the global axes).
 # Adjust these values to match your actual setup.
 tag_global_poses = {
-    0: (np.eye(3), np.array([0.0, 0.0, 0.0])),       # Tag 0 at origin
-    1: (np.eye(3), np.array([0.3, 0.0, 0.0])),       # Tag 1 0.3 m to the right
-    2: (np.eye(3), np.array([0.3, 0.3, 0.0])),       # Tag 2 0.3 m right and 0.3 m up
-    3: (np.eye(3), np.array([0.0, 0.3, 0.0]))        # Tag 3 0.3 m up
+    0: (np.eye(3), np.array([0.0, 0.0, 0.0])),    # Tag 0 at origin
+    1: (np.eye(3), np.array([0.40, 0.0, 0.0])),    # Tag 1 0.40 m to the right
+    2: (np.eye(3), np.array([0.40, 0.40, 0.0])),   # Tag 2 0.40 m right and 0.40 m up
+    3: (np.eye(3), np.array([0.0, 0.40, 0.0]))     # Tag 3 0.40 m up
 }
 
 print("[INFO] Starting real-time AprilTag detection. Press 'q' to exit.")
