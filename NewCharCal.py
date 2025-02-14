@@ -14,7 +14,7 @@ aruco_detector = cv2.aruco.ArucoDetector(aruco_dict, aruco_params)
 board = cv2.aruco.CharucoBoard((5, 7), 0.04, 0.02, aruco_dict)
 
 # Open the default webcam
-cap = cv2.VideoCapture(0)
+cap = cv2.VideoCapture(1)
 if not cap.isOpened():
     print("Error: Could not open video stream.")
     exit(1)
