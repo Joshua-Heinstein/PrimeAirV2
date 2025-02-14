@@ -23,7 +23,6 @@ distCoeffs = np.array([-1.69118596e-02, -1.00094621e-01, -1.53552265e-03, -4.942
 tag_size = 0.155  # Adjust to your tag's physical size
 
 # Define the 3D coordinates of the AprilTag corners in the tag's coordinate system.
-# (Assuming the tag is centered at (0, 0, 0) and lies in the XY plane)
 obj_pts = np.array([
     [-tag_size/2, -tag_size/2, 0.0],  # Bottom-left corner
     [ tag_size/2, -tag_size/2, 0.0],  # Bottom-right corner
@@ -35,9 +34,6 @@ obj_pts = np.array([
 detector = Detector(families="tag16h5")
 
 # Define the known global pose (rotation and translation) for each tag.
-# In this example, we assume the tags are arranged in a square with side length 0.3 m.
-# The rotation is assumed to be identity (i.e. the tag's axes are aligned with the global axes).
-# Adjust these values to match your actual setup.
 tag_global_poses = {
     0: (np.eye(3), np.array([0.0, 0.0, 0.0])),    # Tag 0 at origin
     1: (np.eye(3), np.array([0.40, 0.0, 0.0])),    # Tag 1 0.40 m to the right
@@ -64,7 +60,7 @@ while True:
 
     for r in results:
         # Draw bounding box for visualization.
-        pts = r['corners'].astype(int)
+        pts = r.corners.astype(int)
         (ptA, ptB, ptC, ptD) = pts
         cv2.line(frame, tuple(ptA), tuple(ptB), (0, 255, 0), 2)
         cv2.line(frame, tuple(ptB), tuple(ptC), (0, 255, 0), 2)
@@ -72,13 +68,13 @@ while True:
         cv2.line(frame, tuple(ptD), tuple(ptA), (0, 255, 0), 2)
 
         # Draw the center point.
-        cX, cY = int(r['center'][0]), int(r['center'][1])
+        cX, cY = int(r.center[0]), int(r.center[1])
         cv2.circle(frame, (cX, cY), 5, (0, 0, 255), -1)
 
         # -------------------------
         # Pose Estimation using solvePnP
         # -------------------------
-        image_pts = r['corners'].astype(np.float64)
+        image_pts = r.corners.astype(np.float64)
         success, rvec, tvec = cv2.solvePnP(obj_pts, image_pts, cameraMatrix, distCoeffs)
         if success:
             # Convert rotation vector to rotation matrix.
@@ -87,12 +83,11 @@ while True:
             drone_pos_tag = -R.T @ tvec  # 3x1 vector
 
             # Check if this tag's ID is in our known global poses.
-            tag_id = r['id']  # pupil_apriltags uses the key 'id' for the tag identifier
+            tag_id = r.tag_id  # Corrected key access
             if tag_id in tag_global_poses:
                 # Retrieve the global pose of the tag.
                 R_tag_global, t_tag_global = tag_global_poses[tag_id]
                 # Transform the drone position from the tag's coordinate system to the global system.
-                # Since R_tag_global is identity in this example, this simplifies to:
                 global_pos = drone_pos_tag.flatten() + t_tag_global
                 global_positions.append(global_pos)
 
