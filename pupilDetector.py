@@ -1,6 +1,6 @@
 import cv2
 import numpy as np
-import pupil_apriltags as apriltag
+from pupil_apriltags import Detector
 
 # -------------------------
 # Camera Setup and Calibration
@@ -12,8 +12,8 @@ if not cap.isOpened():
 
 # Replace these with your actual calibration parameters.
 cameraMatrix = np.array([[2.03955702e+03,   0.0,           9.64412115e+02],
-                         [  0.0,           2.03694742e+03,   7.27311542e+02],
-                         [  0.0,             0.0,           1.0]], dtype=np.float64)
+                           [  0.0,           2.03694742e+03,   7.27311542e+02],
+                           [  0.0,             0.0,           1.0]], dtype=np.float64)
 distCoeffs = np.array([-1.69118596e-02, -1.00094621e-01, -1.53552265e-03, -4.94214647e-03, 1.91215518e+00], dtype=np.float64)
 
 # -------------------------
@@ -31,9 +31,8 @@ obj_pts = np.array([
     [-tag_size/2,  tag_size/2, 0.0]   # Top-left corner
 ], dtype=np.float64)
 
-# Initialize the AprilTag detector.
-detector = apriltag.Detector(families="tag16h5")
-
+# Initialize the AprilTag detector using pupil_apriltags.
+detector = Detector(families="tag16h5")
 
 # Define the known global pose (rotation and translation) for each tag.
 # In this example, we assume the tags are arranged in a square with side length 0.3 m.
@@ -57,7 +56,7 @@ while True:
     # Convert frame to grayscale for detection.
     gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
 
-    # Detect AprilTags.
+    # Detect AprilTags using pupil_apriltags.
     results = detector.detect(gray)
 
     # List to collect drone (camera) positions in the global coordinate system.
@@ -65,7 +64,7 @@ while True:
 
     for r in results:
         # Draw bounding box for visualization.
-        pts = r.corners.astype(int)
+        pts = r['corners'].astype(int)
         (ptA, ptB, ptC, ptD) = pts
         cv2.line(frame, tuple(ptA), tuple(ptB), (0, 255, 0), 2)
         cv2.line(frame, tuple(ptB), tuple(ptC), (0, 255, 0), 2)
@@ -73,13 +72,13 @@ while True:
         cv2.line(frame, tuple(ptD), tuple(ptA), (0, 255, 0), 2)
 
         # Draw the center point.
-        cX, cY = int(r.center[0]), int(r.center[1])
+        cX, cY = int(r['center'][0]), int(r['center'][1])
         cv2.circle(frame, (cX, cY), 5, (0, 0, 255), -1)
 
         # -------------------------
         # Pose Estimation using solvePnP
         # -------------------------
-        image_pts = r.corners.astype(np.float64)
+        image_pts = r['corners'].astype(np.float64)
         success, rvec, tvec = cv2.solvePnP(obj_pts, image_pts, cameraMatrix, distCoeffs)
         if success:
             # Convert rotation vector to rotation matrix.
@@ -88,7 +87,7 @@ while True:
             drone_pos_tag = -R.T @ tvec  # 3x1 vector
 
             # Check if this tag's ID is in our known global poses.
-            tag_id = r.tag_id
+            tag_id = r['id']  # pupil_apriltags uses the key 'id' for the tag identifier
             if tag_id in tag_global_poses:
                 # Retrieve the global pose of the tag.
                 R_tag_global, t_tag_global = tag_global_poses[tag_id]
