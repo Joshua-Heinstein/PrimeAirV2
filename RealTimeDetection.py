@@ -1,11 +1,11 @@
 import cv2
 import numpy as np
-import apriltag
+import pupil_apriltags as apriltag
 
 # -------------------------
 # Camera Setup and Calibration
 # -------------------------
-cap = cv2.VideoCapture(2)
+cap = cv2.VideoCapture(1)
 if not cap.isOpened():
     print("Error: Could not open video stream.")
     exit()
@@ -32,8 +32,8 @@ obj_pts = np.array([
 ], dtype=np.float64)
 
 # Initialize the AprilTag detector.
-options = apriltag.DetectorOptions(families="tag16h5")
-detector = apriltag.Detector(options)
+detector = apriltag.Detector(families="tag16h5")
+
 
 # Define the known global pose (rotation and translation) for each tag.
 # In this example, we assume the tags are arranged in a square with side length 0.3 m.
