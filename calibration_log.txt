@@ -1,0 +1,98 @@
+Processing file: 9_Color.png
+Chessboard detected in 9_Color.png
+
+Camera matrix for 9_Color.png:
+[[473.3027833153279, 0.0, 331.0356663620115], [0.0, 475.4323052314519, 253.5189093731013], [0.0, 0.0, 1.0]]
+
+Distortion coefficients for 9_Color.png:
+[[-0.21542058314402032, 2.2734371092234076, 0.005903444395544143, -0.005331311348302883, -9.16079294998683]]
+------------------------------------------------------------
+Press any key to close this window and proceed to the next image.
+Processing file: output_image3.png
+Chessboard NOT detected in output_image3.png
+Processing file: 10_Color.png
+Chessboard detected in 10_Color.png
+
+Camera matrix for 10_Color.png:
+[[947.5384885450896, 0.0, 422.390587617053], [0.0, 968.2598491992545, 348.66297344487595], [0.0, 0.0, 1.0]]
+
+Distortion coefficients for 10_Color.png:
+[[-0.28295506634966994, 3.0207155091204547, 0.023150702384204976, -0.012521876866532944, -9.184262531067928]]
+------------------------------------------------------------
+Press any key to close this window and proceed to the next image.
+Processing file: 2_Color.png
+Chessboard detected in 2_Color.png
+
+Camera matrix for 2_Color.png:
+[[84.43652716523177, 0.0, 344.91124462786206], [0.0, 84.9032362146345, 205.59860313959226], [0.0, 0.0, 1.0]]
+
+Distortion coefficients for 2_Color.png:
+[[-0.0029140232132882945, -0.0008574701574878636, 6.87991798257433e-05, -0.002016492001185059, 0.000494602425651567]]
+------------------------------------------------------------
+Press any key to close this window and proceed to the next image.
+Processing file: Tags8.5inApart_Color.png
+Chessboard NOT detected in Tags8.5inApart_Color.png
+Processing file: 8_Color.png
+Chessboard detected in 8_Color.png
+
+Camera matrix for 8_Color.png:
+[[472.8107956106661, 0.0, 349.36793938393555], [0.0, 478.4887819582901, 282.40560834775977], [0.0, 0.0, 1.0]]
+
+Distortion coefficients for 8_Color.png:
+[[-0.2457767744631497, 1.476262101302166, 0.01180956153916028, -0.005955772899754924, -3.043930460263049]]
+------------------------------------------------------------
+Press any key to close this window and proceed to the next image.
+Processing file: 5_Color.png
+Chessboard detected in 5_Color.png
+
+Camera matrix for 5_Color.png:
+[[787.2324071944915, 0.0, 291.18461700128506], [0.0, 779.7882000535761, 271.67800736905775], [0.0, 0.0, 1.0]]
+
+Distortion coefficients for 5_Color.png:
+[[1.0957815460408906, -157.79420019637988, 0.03905721393336933, 0.0032647677469930764, 6240.680020762383]]
+------------------------------------------------------------
+Press any key to close this window and proceed to the next image.
+Processing file: 3_Color.png
+Chessboard detected in 3_Color.png
+
+Camera matrix for 3_Color.png:
+[[408.47235098692653, 0.0, 362.9275397702588], [0.0, 411.90849744734015, 255.8755528365551], [0.0, 0.0, 1.0]]
+
+Distortion coefficients for 3_Color.png:
+[[-0.12115772121323136, 0.4474491178566318, 0.002182019133491247, -0.009474743418717842, -0.5798459520200212]]
+------------------------------------------------------------
+Press any key to close this window and proceed to the next image.
+Processing file: 6_Color.png
+Chessboard detected in 6_Color.png
+
+Camera matrix for 6_Color.png:
+[[702.2929259226994, 0.0, 343.8865420558736], [0.0, 709.1260573313587, 282.5299234337275], [0.0, 0.0, 1.0]]
+
+Distortion coefficients for 6_Color.png:
+[[-0.5769401009268126, 6.279411108810679, 0.008540756881427278, -0.041454901954769544, -31.21554849590023]]
+------------------------------------------------------------
+Press any key to close this window and proceed to the next image.
+Processing file: TestSubject1_Color.png
+Chessboard NOT detected in TestSubject1_Color.png
+Processing file: input.png
+Chessboard NOT detected in input.png
+Processing file: 7_Color.png
+Chessboard detected in 7_Color.png
+
+Camera matrix for 7_Color.png:
+[[295.724293367218, 0.0, 290.4338744934668], [0.0, 295.1565745036671, 252.5116385860851], [0.0, 0.0, 1.0]]
+
+Distortion coefficients for 7_Color.png:
+[[0.09419278886772046, -1.0855035058967595, 0.011685413592893023, -0.001864002413766292, 3.815310297379142]]
+------------------------------------------------------------
+Press any key to close this window and proceed to the next image.
+Processing file: 1_Color.png
+Chessboard detected in 1_Color.png
+
+Camera matrix for 1_Color.png:
+[[1285.304270612938, 0.0, 372.3537389202105], [0.0, 1277.117027319877, 259.40119984570845], [0.0, 0.0, 1.0]]
+
+Distortion coefficients for 1_Color.png:
+[[0.8383447331731333, -119.2382172173877, 0.0193661258901992, 0.009606565399942141, 4717.958328901753]]
+------------------------------------------------------------
+Press any key to close this window and proceed to the next image.
