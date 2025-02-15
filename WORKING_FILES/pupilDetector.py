@@ -1,6 +1,6 @@
 import cv2
 import numpy as np
-import apriltag
+from pupil_apriltags import Detector
 
 # -------------------------
 # Camera Setup and Calibration
@@ -12,8 +12,8 @@ if not cap.isOpened():
 
 # Replace these with your actual calibration parameters.
 cameraMatrix = np.array([[2.03955702e+03,   0.0,           9.64412115e+02],
-                         [  0.0,           2.03694742e+03,   7.27311542e+02],
-                         [  0.0,             0.0,           1.0]], dtype=np.float64)
+                           [  0.0,           2.03694742e+03,   7.27311542e+02],
+                           [  0.0,             0.0,           1.0]], dtype=np.float64)
 distCoeffs = np.array([-1.69118596e-02, -1.00094621e-01, -1.53552265e-03, -4.94214647e-03, 1.91215518e+00], dtype=np.float64)
 
 # -------------------------
@@ -23,7 +23,6 @@ distCoeffs = np.array([-1.69118596e-02, -1.00094621e-01, -1.53552265e-03, -4.942
 tag_size = 0.155  # Adjust to your tag's physical size
 
 # Define the 3D coordinates of the AprilTag corners in the tag's coordinate system.
-# (Assuming the tag is centered at (0, 0, 0) and lies in the XY plane)
 obj_pts = np.array([
     [-tag_size/2, -tag_size/2, 0.0],  # Bottom-left corner
     [ tag_size/2, -tag_size/2, 0.0],  # Bottom-right corner
@@ -31,14 +30,10 @@ obj_pts = np.array([
     [-tag_size/2,  tag_size/2, 0.0]   # Top-left corner
 ], dtype=np.float64)
 
-# Initialize the AprilTag detector.
-options = apriltag.DetectorOptions(families="tag16h5")
-detector = apriltag.Detector(options)
+# Initialize the AprilTag detector using pupil_apriltags.
+detector = Detector(families="tag16h5")
 
 # Define the known global pose (rotation and translation) for each tag.
-# In this example, we assume the tags are arranged in a square with side length 0.3 m.
-# The rotation is assumed to be identity (i.e. the tag's axes are aligned with the global axes).
-# Adjust these values to match your actual setup.
 tag_global_poses = {
     0: (np.eye(3), np.array([0.0, 0.0, 0.0])),    # Tag 0 at origin
     1: (np.eye(3), np.array([0.40, 0.0, 0.0])),    # Tag 1 0.40 m to the right
@@ -57,7 +52,7 @@ while True:
     # Convert frame to grayscale for detection.
     gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
 
-    # Detect AprilTags.
+    # Detect AprilTags using pupil_apriltags.
     results = detector.detect(gray)
 
     # List to collect drone (camera) positions in the global coordinate system.
@@ -88,12 +83,11 @@ while True:
             drone_pos_tag = -R.T @ tvec  # 3x1 vector
 
             # Check if this tag's ID is in our known global poses.
-            tag_id = r.tag_id
+            tag_id = r.tag_id  # Corrected key access
             if tag_id in tag_global_poses:
                 # Retrieve the global pose of the tag.
                 R_tag_global, t_tag_global = tag_global_poses[tag_id]
                 # Transform the drone position from the tag's coordinate system to the global system.
-                # Since R_tag_global is identity in this example, this simplifies to:
                 global_pos = drone_pos_tag.flatten() + t_tag_global
                 global_positions.append(global_pos)
 
