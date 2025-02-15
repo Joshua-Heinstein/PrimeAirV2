@@ -18,10 +18,10 @@ It performs the following:
 Adjust the CSV filenames and paths as needed.
 """
 
-import pandas as pd
-import numpy as np
-import matplotlib.pyplot as plt
-import seaborn as sns
+import pandas as pd # type: ignore
+import numpy as np # type: ignore
+import matplotlib.pyplot as plt # type: ignore
+import seaborn as sns # type: ignore
 
 # Set up plot style
 sns.set(style="whitegrid")

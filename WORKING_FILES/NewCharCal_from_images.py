@@ -1,6 +1,38 @@
-# NewCharCal_from_images.py
-# Modified to process 20 pre-captured images for 4K calibration
-# 2/14/2025
+"""
+File: NewCharCal_with_images.py
+Author: Santiago Burgos_fallon
+Date: 2025-02-14
+Version: 1.0
+
+Description:
+    This script performs camera calibration using a set of pre-captured images of a ChArUco board.
+    Instead of capturing frames from a live camera feed, it loads a series of calibration images
+    from a specified directory (e.g., "calibration_images/*.jpg"). The script then processes each image
+    to detect ArUco markers and interpolate ChArUco board corners, collecting valid calibration data.
+    
+    The calibration data (ChArUco corners and IDs) are used with OpenCV's ArUco module to compute the camera's 
+    intrinsic parameters (camera matrix) and distortion coefficients. The setup is tailored for high-resolution 
+    (4K) images.
+    
+Usage:
+    1. Ensure your calibration images are placed in the specified directory with the appropriate file extension.
+    2. Modify the `image_paths` glob pattern and `num_images` variable if necessary.
+    3. Run the script; it will process each image, display processing status, and output the calibration results.
+    
+Dependencies:
+    - Python 3.x
+    - OpenCV with the ArUco module enabled
+    - NumPy
+    - glob (standard library)
+    
+Output:
+    - Prints the computed camera (intrinsic) matrix and distortion coefficients to the console.
+    
+Notes:
+    - For visualization purposes, code lines for displaying the processed image are included but commented out.
+    - Ensure that your images provide a sufficient view of the ChArUco board for successful calibration.
+"""
+
 
 import cv2
 import numpy as np
