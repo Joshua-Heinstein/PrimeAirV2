@@ -44,10 +44,10 @@ import csv
 # Camera Setup and Calibration
 # -------------------------
 # (Replace these parameters with your actual calibration values.)
-cameraMatrix = np.array([[2.03955702e+03,   0.0,           9.64412115e+02],
-                         [  0.0,           2.03694742e+03,   7.27311542e+02],
+cameraMatrix = np.array([[2.94851428e+03,   0.0,           1.860348583e+03],
+                         [  0.0,           2.94619937e+03,   1.2779457e+02],
                          [  0.0,             0.0,           1.0]], dtype=np.float64)
-distCoeffs = np.array([-1.69118596e-02, -1.00094621e-01, -1.53552265e-03, -4.94214647e-03, 1.91215518e+00],
+distCoeffs = np.array([1.42864105e-02, 2.55618063e+00,1.77050558e-02, -2.06885783e-03, -1.91201560e+01],
                       dtype=np.float64)
 
 # -------------------------
@@ -72,10 +72,10 @@ detector = apriltag.Detector(options)
 # -------------------------
 # Known latitude/longitude for each tag (in degrees); adjust to your actual coordinates.
 tag_global_coords = {
-    0: (37.4219999, -122.0840575),
-    1: (37.4219998, -122.0840574),
-    2: (37.4219997, -122.0840573),
-    3: (37.4219996, -122.0840572)
+    0: (34.10500611, 117.71344047),
+    1: (34.10500611, 117.71344480),
+    2: (34.10500252, 117.71344047),
+    3: (34.10500252, 117.71344480)
 }
 
 # Assume that all tags lie on a plane at a known altitude.
@@ -118,7 +118,7 @@ for tag_id, (lat, lon) in tag_global_coords.items():
 # Process Multiple Image Files
 # -------------------------
 # Update the path/pattern to match your image files.
-image_files = sorted(glob.glob("path/to/your/images/*.jpg"))
+image_files = sorted(glob.glob("/Users/sbf/Desktop/Flight Photos/*.jpg"))
 if not image_files:
     print("No image files found. Check your path and file pattern.")
     exit()
