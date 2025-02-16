@@ -44,11 +44,18 @@ import csv
 # Camera Setup and Calibration
 # -------------------------
 # (Replace these parameters with your actual calibration values.)
-cameraMatrix = np.array([[2.03955702e+03,   0.0,           9.64412115e+02],
-                         [  0.0,           2.03694742e+03,   7.27311542e+02],
-                         [  0.0,             0.0,           1.0]], dtype=np.float64)
-distCoeffs = np.array([-1.69118596e-02, -1.00094621e-01, -1.53552265e-03, -4.94214647e-03, 1.91215518e+00],
-                      dtype=np.float64)
+
+cameraMatrix = np.array([[1.43374197e+04, 0.00000000e+00, 2.02802116e+03],
+                            [0.00000000e+00, 1.43107610e+04, 1.13273654e+03],
+                            [0.00000000e+00, 0.00000000e+00, 1.00000000e+00]], dtype=np.float64)
+distCoeffs = np.array([ 1.44235621e+00,  2.32751001e+01, -4.09845990e-02,  4.01781273e-02,-2.28454214e+03],
+                       dtype=np.float64)
+
+# cameraMatrix = np.array([[2.03955702e+03,   0.0,           9.64412115e+02],
+#                          [  0.0,           2.03694742e+03,   7.27311542e+02],
+#                          [  0.0,             0.0,           1.0]], dtype=np.float64)
+# distCoeffs = np.array([-1.69118596e-02, -1.00094621e-01, -1.53552265e-03, -4.94214647e-03, 1.91215518e+00],
+#                       dtype=np.float64)
 
 # -------------------------
 # AprilTag and Pose Setup
@@ -118,7 +125,7 @@ for tag_id, (lat, lon) in tag_global_coords.items():
 # Process Multiple Image Files
 # -------------------------
 # Update the path/pattern to match your image files.
-image_files = sorted(glob.glob("path/to/your/images/*.jpg"))
+image_files = sorted(glob.glob("../../apriltag_img_test/*.jpg"))
 if not image_files:
     print("No image files found. Check your path and file pattern.")
     exit()
