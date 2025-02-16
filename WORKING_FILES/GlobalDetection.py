@@ -36,7 +36,7 @@ Usage:
 
 import cv2
 import numpy as np
-import apriltag
+import pupil_apriltags as apriltag
 import glob
 import csv
 
@@ -64,8 +64,8 @@ obj_pts = np.array([
 ], dtype=np.float64)
 
 # Initialize the AprilTag detector.
-options = apriltag.DetectorOptions(families="tag16h5")
-detector = apriltag.Detector(options)
+detector = apriltag.Detector(families="tag16h5")
+
 
 # -------------------------
 # Global (Local Metric) Frame Setup Using Lat/Lon
