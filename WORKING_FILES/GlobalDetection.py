@@ -36,7 +36,7 @@ Usage:
 
 import cv2
 import numpy as np
-import apriltag
+import pupil_apriltags as apriltag
 import glob
 import csv
 
@@ -44,11 +44,18 @@ import csv
 # Camera Setup and Calibration
 # -------------------------
 # (Replace these parameters with your actual calibration values.)
-cameraMatrix = np.array([[2.94851428e+03,   0.0,           1.860348583e+03],
-                         [  0.0,           2.94619937e+03,   1.2779457e+02],
-                         [  0.0,             0.0,           1.0]], dtype=np.float64)
-distCoeffs = np.array([1.42864105e-02, 2.55618063e+00,1.77050558e-02, -2.06885783e-03, -1.91201560e+01],
-                      dtype=np.float64)
+
+cameraMatrix = np.array([[1.43374197e+04, 0.00000000e+00, 2.02802116e+03],
+                            [0.00000000e+00, 1.43107610e+04, 1.13273654e+03],
+                            [0.00000000e+00, 0.00000000e+00, 1.00000000e+00]], dtype=np.float64)
+distCoeffs = np.array([ 1.44235621e+00,  2.32751001e+01, -4.09845990e-02,  4.01781273e-02,-2.28454214e+03],
+                       dtype=np.float64)
+
+# cameraMatrix = np.array([[2.03955702e+03,   0.0,           9.64412115e+02],
+#                          [  0.0,           2.03694742e+03,   7.27311542e+02],
+#                          [  0.0,             0.0,           1.0]], dtype=np.float64)
+# distCoeffs = np.array([-1.69118596e-02, -1.00094621e-01, -1.53552265e-03, -4.94214647e-03, 1.91215518e+00],
+#                       dtype=np.float64)
 
 # -------------------------
 # AprilTag and Pose Setup
@@ -64,18 +71,18 @@ obj_pts = np.array([
 ], dtype=np.float64)
 
 # Initialize the AprilTag detector.
-options = apriltag.DetectorOptions(families="tag16h5")
-detector = apriltag.Detector(options)
+detector = apriltag.Detector(families="tag16h5")
+
 
 # -------------------------
 # Global (Local Metric) Frame Setup Using Lat/Lon
 # -------------------------
 # Known latitude/longitude for each tag (in degrees); adjust to your actual coordinates.
 tag_global_coords = {
-    0: (34.10500611, 117.71344047),
-    1: (34.10500611, 117.71344480),
-    2: (34.10500252, 117.71344047),
-    3: (34.10500252, 117.71344480)
+    0: (34.4219999, -122.0840575),
+    1: (34.4219998, -122.0840574),
+    2: (34.4219997, -122.0840573),
+    3: (34.4219996, -122.0840572)
 }
 
 # Assume that all tags lie on a plane at a known altitude.
@@ -118,7 +125,7 @@ for tag_id, (lat, lon) in tag_global_coords.items():
 # Process Multiple Image Files
 # -------------------------
 # Update the path/pattern to match your image files.
-image_files = sorted(glob.glob("/Users/sbf/Desktop/Flight Photos/*.jpg"))
+image_files = sorted(glob.glob("C:/Users/joshu/Desktop/All_Drone_Pics/Drone_Pics_2_16_25/*.[jJ][pP][gG]"))
 if not image_files:
     print("No image files found. Check your path and file pattern.")
     exit()
@@ -137,7 +144,7 @@ with open(csv_file, mode='w', newline='') as f:
             print("Error: Could not load image:", image_path)
             writer.writerow([image_path, "NA", "NA", "NA"])
             continue
-
+            
         gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
         results = detector.detect(gray)
         global_positions = []
