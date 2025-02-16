@@ -125,7 +125,7 @@ for tag_id, (lat, lon) in tag_global_coords.items():
 # Process Multiple Image Files
 # -------------------------
 # Update the path/pattern to match your image files.
-image_files = sorted(glob.glob("../../apriltag_img_test/*.jpg"))
+image_files = sorted(glob.glob("C:/Users/joshu/Desktop/All_Drone_Pics/Drone_Pics_2_16_25/*.[jJ][pP][gG]"))
 if not image_files:
     print("No image files found. Check your path and file pattern.")
     exit()
@@ -144,7 +144,7 @@ with open(csv_file, mode='w', newline='') as f:
             print("Error: Could not load image:", image_path)
             writer.writerow([image_path, "NA", "NA", "NA"])
             continue
-
+            
         gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
         results = detector.detect(gray)
         global_positions = []
