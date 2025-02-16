@@ -54,7 +54,7 @@ frames_processed = 0
 num_images = 20  # Number of images to use for calibration
 
 # Replace with your image directory and file extension as needed.
-image_paths = sorted(glob.glob("calibration_images/*.jpg"))
+image_paths = sorted(glob.glob("../../calib_img/*.jpg"))
 
 if len(image_paths) < num_images:
     print(f"Error: Found only {len(image_paths)} images, but need at least {num_images}.")

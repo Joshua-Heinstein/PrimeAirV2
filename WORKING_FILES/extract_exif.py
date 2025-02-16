@@ -62,7 +62,7 @@ def get_lat_lon_alt_from_exif(exif_data):
 
 
 # Path to the directory containing images
-image_directory = image_directory = "/Users/reinabhatkuly/Desktop/drone video"  # Change this to your images directory
+image_directory = image_directory = "../../apriltag_img_test/"  # Change this to your images directory
 image_names = sorted(os.listdir(image_directory))
 
 # List to hold image GPS data
