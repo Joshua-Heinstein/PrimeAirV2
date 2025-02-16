@@ -79,10 +79,10 @@ detector = apriltag.Detector(families="tag16h5")
 # -------------------------
 # Known latitude/longitude for each tag (in degrees); adjust to your actual coordinates.
 tag_global_coords = {
-    0: (34.4219999, -122.0840575),
-    1: (34.4219998, -122.0840574),
-    2: (34.4219997, -122.0840573),
-    3: (34.4219996, -122.0840572)
+    0: (34.10500611, 117.71344047),
+    1: (34.10500611, 117.71344480),
+    2: (34.10500252, 117.71344047),
+    3: (34.10500252, 117.71344480)
 }
 
 # Assume that all tags lie on a plane at a known altitude.
