@@ -78,15 +78,17 @@ detector = apriltag.Detector(families="tag16h5")
 # Global (Local Metric) Frame Setup Using Lat/Lon
 # -------------------------
 # Known latitude/longitude for each tag (in degrees); adjust to your actual coordinates.
+
+
 tag_global_coords = {
-    0: (34.10500611, 117.71344047),
-    1: (34.10500611, 117.71344480),
-    2: (34.10500252, 117.71344047),
-    3: (34.10500252, 117.71344480)
-}
+    0: (34.106356, -117.71246),
+    1: (34.106356, -117.71251),
+    2: (34.106361, -117.71246),
+    3: (34.106361, -117.71251)
+} 
 
 # Assume that all tags lie on a plane at a known altitude.
-base_alt = 312.208  # altitude in meters
+base_alt = 414.208  # altitude in meters
 
 # Use tag 0 as the base coordinate for our local frame.
 base_lat, base_lon = tag_global_coords[0]
@@ -125,7 +127,7 @@ for tag_id, (lat, lon) in tag_global_coords.items():
 # Process Multiple Image Files
 # -------------------------
 # Update the path/pattern to match your image files.
-image_files = sorted(glob.glob("C:/Users/joshu/Desktop/All_Drone_Pics/Drone_Pics_2_16_25/*.[jJ][pP][gG]"))
+image_files = sorted(glob.glob("C:/Users/joshu/Desktop/PrimeAir_Drone_Pics/Drone_Pics_2_19_25/40m_pics/*.[jJ][pP][gG]"))
 if not image_files:
     print("No image files found. Check your path and file pattern.")
     exit()
@@ -174,7 +176,10 @@ with open(csv_file, mode='w', newline='') as f:
                 if tag_id in tag_global_local:
                     tag_global_position = tag_global_local[tag_id]
                     # Transform the drone position into the global (local metric) frame.
-                    global_pos = tag_global_position + drone_pos_tag.flatten()
+                    global_pos = tag_global_position.copy()
+                    global_pos[0:2] += drone_pos_tag.flatten()[0:2]
+                    global_pos[2] = tag_global_position[2] - drone_pos_tag.flatten()[2]
+
                     global_positions.append(global_pos)
 
                     text = f"Tag {tag_id}: E:{global_pos[0]:.2f}, N:{global_pos[1]:.2f}, Alt:{global_pos[2]:.2f}"
@@ -196,16 +201,17 @@ with open(csv_file, mode='w', newline='') as f:
             drone_lat, drone_lon = local_to_latlon(avg_position[0], avg_position[1], base_lat, base_lon)
             drone_alt = avg_position[2]
 
-            output_text = f"Drone: Alt {drone_alt:.2f} m, Lat {drone_lat:.7f}, Lon {drone_lon:.7f}"
+            output_text = f"Drone: Alt {drone_alt:.3f} m, Lat {drone_lat:.5f}, Lon {drone_lon:.5f}"
             cv2.putText(frame, output_text, (10, 30),
                         cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 255, 255), 2)
             print("Estimated Drone Global Position:", output_text)
-            writer.writerow([image_path, drone_lat, drone_lon, drone_alt])
+            writer.writerow([image_path,f"{drone_lat:.5f}", f"{drone_lon:.5f}", f"{drone_alt:.2f}"])
         else:
             print("No known tags detected.")
             writer.writerow([image_path, "NA", "NA", "NA"])
-
+ 
         # Display the result for the current image.
+        cv2.namedWindow("Drone Position Estimation", cv2.WINDOW_NORMAL)
         cv2.imshow("Drone Position Estimation", frame)
         key = cv2.waitKey(0) & 0xFF
         if key == ord('q'):

@@ -118,7 +118,8 @@ for i, (metric, exif_col, calc_col) in enumerate(metrics):
     axes[i, 1].set_ylabel(metric)
     axes[i, 1].legend()
 
-plt.tight_layout()
+plt.tight_layout(pad=3.0, w_pad=2.0, h_pad=2.5)
+fig.subplots_adjust(hspace=0.5)
 plt.savefig("side_by_side_comparison.png")
 plt.show()
 
